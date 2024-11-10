@@ -1,0 +1,7 @@
+# uv
+export PATH="/Users/hank/.local/bin:$PATH"
+
+# Environment variables that should be loaded for all shell types
+export PATH="/Users/hank/.local/bin:$PATH"
+export LANG=en_US.UTF-8  # Important for character encoding
+
