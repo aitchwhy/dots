@@ -123,6 +123,7 @@ export PAGER='bat --pager=always'  # Bat as the pager for general output
 #------------------------------------------------------------------------------
 
 # GitHub user settings (replace with your info)
+# https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
 export GITHUB_USER="aitchwhy"
 export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 
