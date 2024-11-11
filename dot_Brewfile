@@ -1,84 +1,205 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
+tap "koekeishiya/formulae"
 tap "temporalio/brew"
+tap "typesense/tap"
 tap "xo/xo"
+# Run your GitHub Actions locally
+brew "act"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
+# AI pair programming in your terminal
 brew "aider"
+# Code searching, linting, rewriting
 brew "ast-grep"
+# Improved shell history for zsh, bash, fish and nushell
 brew "atuin"
+# Fully functional local AWS cloud stack
+brew "localstack"
+# Thin wrapper around the `aws` command-line interface for use with LocalStack
+brew "awscli-local"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# New way to see and navigate directory trees
 brew "broot"
+# Create and view interactive cheat sheets for *nix commands
 brew "cheat"
+# Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Make choices on the command-line
 brew "choose"
+# Power of curl, ease of use of httpie
 brew "curlie"
+# Open source multi-tool for exploring and publishing data
 brew "datasette"
+# Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
+# Load/unload environment variables based on $PWD
 brew "direnv"
+# Disk Usage/Free Utility - a better 'df' alternative
 brew "duf"
+# More intuitive version of du in rust
 brew "dust"
+# Modern, maintained replacement for ls
 brew "eza"
+# Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Terminal JSON viewer
 brew "fx"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
 brew "gh"
+# Work on GitHub issues on the command-line
+brew "ghi"
+# Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Render markdown on the CLI
 brew "glow"
+# Ping, but with a graph
 brew "gping"
+# Command-line tool for generating regular expressions
 brew "grex"
+# Make JSON greppable
 brew "gron"
+# Post-modern modal text editor
+brew "helix"
+# Command-line hex viewer
 brew "hexyl"
+# Improved top (interactive process viewer)
 brew "htop"
+# Interactive command-line HTTP client with autocomplete and syntax highlighting
 brew "http-prompt"
+# User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
-brew "huggingface-cli"
+# Command-line benchmarking tool
 brew "hyperfine"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy way to save and run project-specific commands
+brew "just"
+# Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Simple terminal UI for git commands
 brew "lazygit"
+# Package manager for the Lua programming language
 brew "luarocks"
+# Like sed, awk, cut, join & sort for name-indexed data such as CSV
 brew "miller"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Netlify command-line tool
+brew "netlify-cli"
+# Tiny, lightning fast, feature-packed file manager
+brew "nnn"
+# PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Modern replacement for ps written in Rust
 brew "procs"
+# Service monitoring system and time series database
+brew "prometheus"
+# Python version management
 brew "pyenv"
+# Rsync for cloud storage
 brew "rclone"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Safe, concurrent, practical language
 brew "rust"
+# Modern Day Portscanner
+brew "rustscan"
+# Experimental Package Management Solution for Python
 brew "rye"
+# Intuitive find & replace CLI
 brew "sd"
+# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
+# Cross-shell prompt for astronauts
 brew "starship"
+# Easiest, most secure way to use WireGuard and 2FA
+brew "tailscale"
+# Command-line interface for running and interacting with Temporal Server and UI
 brew "temporal"
+# Simplified and community-driven man pages
 brew "tldr"
+# Network diagnostic tool, inspired by mtr
+brew "trippy"
+# Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Best command-line tool to install and switch between multiple versions of Xcode
 brew "xcodes"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Tool for managing your YubiKey configuration
 brew "ykman"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Additional completion definitions for zsh
 brew "zsh-completions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# Temporal Cloud CLI (tcld)
 brew "temporalio/brew/tcld"
+# GPU-accelerated terminal emulator
 cask "alacritty"
+# Menu bar icon organiser
 cask "bartender"
+# Opensource IDE for exploring and testing api's
 cask "bruno"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Write, edit, and chat about your code with AI
 cask "cursor"
+# Desktop application that wraps Datasette
 cask "datasette"
 cask "font-droid-sans-mono-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-roboto-mono-nerd-font"
 cask "font-space-mono-nerd-font"
 cask "font-zed-mono-nerd-font"
+# Desktop client for GitHub repositories
+cask "github"
+# Git client focusing on productivity
+cask "gitkraken"
+# CLI for GitKraken
+cask "gitkraken-cli"
+# Desktop automation application
+cask "hammerspoon"
+# Testing client for REST, GraphQL, and HTTP APIs
 cask "httpie"
+# GPU-based terminal emulator
 cask "kitty"
+# Web browser focused on privacy and on minimizing tracking and fingerprinting
+cask "mullvad-browser"
+# VPN client
+cask "mullvadvpn"
+# Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Get up and running with large language models locally
 cask "ollama"
+# Replacement for Docker Desktop
 cask "orbstack"
+# HTTP debugging proxy
 cask "proxyman"
+# Quick Look plugin to pretty-print JSON
 cask "quickjson"
+# SSH client
 cask "termius"
+# Application for generating TOTP and HOTP codes
 cask "yubico-authenticator"
+# Application for configuring any YubiKey
 cask "yubico-yubikey-manager"
+vscode "eamodio.gitlens"
 vscode "vscodevim.vim"
