@@ -289,6 +289,7 @@ alias dps='docker ps'
 alias cm="chezmoi"
 alias ze="chezmoi edit ~/.zshrc"
 alias zs="chezmoi re-add ~/.zshrc && chezmoi apply ~/.zshrc"
+alias 
 # should not use below if chezmoi works
 # alias _ze="$EDITOR ~/.zshrc"
 # alias _zs="source ~/.zshrc"
