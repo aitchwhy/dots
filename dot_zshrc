@@ -287,16 +287,29 @@ alias dps='docker ps'
 
 # Chezmoi shortcuts for managing dotfiles
 alias cm="chezmoi"
+alias cms="chezmoi status"
+
+# sync with remote github repo
+alias cmpull="chezmoi update"
+
+alias cme="chezmoi edit --apply"
+alias cme.="chezmoi edit-config --apply"
+alias cmcat="chezmoi cat"
+alias cmcat.="chezmoi cat-config"
+
 alias cma="chezmoi add"
 alias cmra="chezmoi re-add"
 alias cmf="chezmoi forget"
 alias cmap="chezmoi apply"
+
 # managed code
-alias cmsrc="chezmoi source-path"
+alias cmcode="chezmoi source-path"
+alias cmcodels="chezmoi managed"
 # actual code
-alias cmdst="chezmoi source-path"
-alias cm="chezmoi"
-alias cmls="chezmoi managed"
+alias cmreal="chezmoi unmanaged"
+alias cmrealls="chezmoi target-path"
+
+
 alias ze="chezmoi edit ~/.zshrc --apply ~"
 alias zs="chezmoi re-add ~/.zshrc"
 # should not use below if chezmoi works
