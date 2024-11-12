@@ -287,8 +287,18 @@ alias dps='docker ps'
 
 # Chezmoi shortcuts for managing dotfiles
 alias cm="chezmoi"
-alias ze="chezmoi edit ~/.zshrc"
-alias zs="chezmoi re-add ~/.zshrc && chezmoi apply ~/.zshrc"
+alias cma="chezmoi add"
+alias cmra="chezmoi re-add"
+alias cmf="chezmoi forget"
+alias cmap="chezmoi apply"
+# managed code
+alias cmsrc="chezmoi source-path"
+# actual code
+alias cmdst="chezmoi source-path"
+alias cm="chezmoi"
+alias cmls="chezmoi managed"
+alias ze="chezmoi edit ~/.zshrc --apply ~"
+alias zs="chezmoi re-add ~/.zshrc"
 # should not use below if chezmoi works
 # alias _ze="$EDITOR ~/.zshrc"
 # alias _zs="source ~/.zshrc"
