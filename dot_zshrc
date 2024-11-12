@@ -1,6 +1,12 @@
+
+
+# TODO: zsh plugin manager (?) 
+# - https://github.com/zap-zsh/zap
+
 #--------------------------------------------------------
 # Logical flow for zshrc
 #--------------------------------------------------------
+#
 #
 # - Early Performance/Optimizations (like skip_global_compinit, zprof)
 # - Locale Settings (LANG, LC_ALL)
