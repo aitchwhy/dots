@@ -283,10 +283,14 @@ alias falias='alias | fzf'
 # Fuzzy man page search
 alias fman='man -k . | fzf --preview "man {}"'
 
+############
+# use modern alternatives
+############
 # Use bat by default for viewing files
 alias cat='bat --paging=always'
 alias grep='rg'
 alias find='fd'
+alias md='glow'
 
 # Git shortcuts
 alias gs='git status'
@@ -371,6 +375,8 @@ alias bbcheck="brew bundle check --all --global  --verbose"
 
 alias gdl='cd ~/Downloads'
 alias gcf='cd ~/.config/'
+
+
 
 
 
