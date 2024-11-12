@@ -297,7 +297,7 @@ alias cmsrc="chezmoi source-path"
 alias cmdst="chezmoi source-path"
 alias cm="chezmoi"
 alias cmls="chezmoi managed"
-alias ze="chezmoi edit ~/.zshrc --apply ~"
+alias ze="chezmoi edit ~/.zshrc --apply"
 alias zs="chezmoi re-add ~/.zshrc"
 # should not use below if chezmoi works
 # alias _ze="$EDITOR ~/.zshrc"
