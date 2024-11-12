@@ -316,7 +316,7 @@ alias bclean="brew cleanup --prune=all"
 
 alias bpull="bupd && bupg && bclean"
 alias bui="brew uninstall"
-alias bl="brew list"
+alias bls="brew list -1"
 alias bu="brew update"
 alias bin="brew install"
 alias brein="brew reinstall"
