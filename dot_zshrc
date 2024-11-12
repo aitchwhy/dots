@@ -305,10 +305,14 @@ alias la='eza -al --icons'
 alias dc='docker-compose'
 alias dps='docker ps'
 
-# Chezmoi shortcuts for managing dotfiles
+# Zsh+Chezmoi shortcuts for managing dotfiles
 alias ze="chezmoi edit ~/.zshrc --apply"
 alias zs="chezmoi apply -v ~/.zshrc"
 
+# rebuild_zsh_completions
+alias zcompreset="rm -f ~/.zcompdump; compinit"
+
+# Chezmoi shortcuts for managing dotfiles
 alias cm="chezmoi"
 alias cma="chezmoi add"
 alias cmra="chezmoi re-add"
@@ -325,6 +329,9 @@ alias cmls="chezmoi managed"
 # alias _zs="source ~/.zshrc"
 
 # Homebrew operations
+alias b="brew"
+
+alias bh="brew home"
 alias bx="brew commands"
 alias bupd="brew update"
 alias bupg="brew upgrade"
@@ -339,7 +346,6 @@ alias bin="brew install"
 alias brein="brew reinstall"
 alias bi="brew info"
 alias bo="brew outdated"
-alias bs="brew search"
 alias bsd="brew search --eval-all --desc"
 
 
@@ -349,15 +355,13 @@ alias bcin="brew install --cask"
 alias bcup="brew upgrade --cask"
 
 # Homebrew Bundle operations
+alias bb="brew bundle"
+alias bbhelp="brew bundle -h"
+alias bbcat="brew bundle list --all --global --verbose"
 alias bbin="brew bundle install --all --global --verbose"
-alias bblist="brew bundle list --all --global --verbose"
-alias bbls="bblist"
-alias bbuntracked="brew bundle check --all --verbose --global"
-alias bbsavecheck="brew bundle dump --all --verbose --describe --global"
-alias bbsave="brew bundle dump --all --verbose --describe --global -f"
-
-# rebuild_zsh_completions
-alias zcompreset="rm -f ~/.zcompdump; compinit"
+alias bbls="brew bundle dump --all --file=- --verbose"
+alias bbsave="brew bundle dump --all --global --verbose"
+alias bbcheck="brew bundle check --all --global  --verbose"
 
 #------------------------------------------------------------------------------
 # TODO: Sourcing Additional Files/External Scripts (For Modularity)
