@@ -287,20 +287,30 @@ alias dps='docker ps'
 
 # Chezmoi shortcuts for managing dotfiles
 alias cm="chezmoi"
-alias cze="chezmoi edit ~/.zshrc"
-alias czs="chezmoi re-add ~/.zshrc && chezmoi apply ~/.zshrc"
-alias ze="$EDITOR ~/.zshrc"
-alias zs="source ~/.zshrc"
+alias ze="chezmoi edit ~/.zshrc"
+alias zs="chezmoi re-add ~/.zshrc && chezmoi apply ~/.zshrc"
+# should not use below if chezmoi works
+# alias _ze="$EDITOR ~/.zshrc"
+# alias _zs="source ~/.zshrc"
 
 # Homebrew operations
+alias bx="brew commands"
+alias bupd="brew update"
+alias bupg="brew upgrade"
+alias bdoc="brew doctor"
+alias bclean="brew cleanup --prune=all"
+
+alias bpull="bupd && bupg && bclean"
+alias bui="brew uninstall"
 alias bl="brew list"
 alias bu="brew update"
 alias bin="brew install"
-alias bin="brew install"
-alias bup="brew upgrade"
+alias brein="brew reinstall"
+alias bi="brew info"
 alias bo="brew outdated"
-alias bs="brew search --eval-all"
-alias bsd="brew search --eval-all --desc "
+# alias bs="brew search --eval-all"
+alias bs="brew search --eval-all --desc"
+
 
 # Homebrew Cask operations
 alias bcl="brew list --cask"
@@ -309,8 +319,11 @@ alias bcup="brew upgrade --cask"
 
 # Homebrew Bundle operations
 alias bbin="brew bundle install --all --global --verbose"
+alias bblist="brew bundle list --all --global --verbose"
+alias bbls="bblist"
+alias bbuntracked="brew bundle check --all --verbose --global"
+alias bbsavecheck="brew bundle dump --all --verbose --describe --global"
 alias bbsave="brew bundle dump --all --verbose --describe --global -f"
-alias bbcheck="brew bundle check --all --verbose --global"
 
 # rebuild_zsh_completions
 alias zcompreset="rm -f ~/.zcompdump; compinit"
