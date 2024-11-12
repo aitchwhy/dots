@@ -257,6 +257,7 @@ function y() {
 
 # Stream large data using bat + fzf
 alias flog='fzf --preview "bat --style=numbers --color=always --line-range=:500 {}"'
+alias falias='alias | fzf'
 
 # Fuzzy man page search
 alias fman='man -k . | fzf --preview "man {}"'
