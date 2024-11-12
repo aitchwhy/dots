@@ -1,5 +1,6 @@
 
 
+
 # TODO: zsh plugin manager (?) 
 # - https://github.com/zap-zsh/zap
 # - antidote
@@ -163,19 +164,20 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 # make sure inserting zsh/site-functions (eval "$(brew shellenv)") is done BEFORE initialising zsh’s completion init (autoload -Ux compinit && compinit).
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 #------------------------------------------------------------------------------
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 
 #------------------------------------------------------------------------------
 # Completion System Initialization (Load Late to Avoid Reinitialization)
 #------------------------------------------------------------------------------
 # zsh completions initialization
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-    compinit;
-else
-    compinit -C;
-fi
-
+autoload -Uz compinit; compinit
+# if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+#     compinit;
+# else
+#     compinit -C;
+# fi
+#
 #------------------------------------------------------------------------------
 # Core Tool Initialization (Order Matters)
 #------------------------------------------------------------------------------
