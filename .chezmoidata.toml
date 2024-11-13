@@ -1,0 +1,66 @@
+[data]
+name = "Hank Lee"
+email = "hank.lee.qed@gmail.com"
+github_user = "aitchwhy"
+
+[data.paths]
+downloads = "~/Downloads"
+projects = "~/Projects"
+global_python_venv = "~/src/.python-global"
+
+[data.apps]
+editor = "nvim"
+terminal = "warp"
+browser = "arc"
+
+[data.git]
+signing_key = "XXXX" # Your GPG key
+default_branch = "main"
+
+[data.shell]
+plugins = [
+    "zsh-syntax-highlighting",
+    "zsh-autosuggestions",
+    "zsh-autopair",
+    "zsh-history-substring-search"
+]
+
+[data.brew]
+taps = [
+    "homebrew/core",
+    "homebrew/cask",
+    "homebrew/cask-fonts"
+]
+packages = [
+    "zsh",
+    "starship",
+    "zoxide",
+    "fzf",
+    "ripgrep",
+    "fd",
+    "bat",
+    "eza",
+    "git-delta",
+    "gh",
+    "lazygit",
+    "neovim"
+]
+casks = [
+    "font-jetbrains-mono-nerd-font",
+    "warp",
+    "arc"
+]
+
+[data.folders]
+config_dirs = [
+    "zsh",
+    "warp",
+    "starship",
+    "git",
+    "nvim"
+]
+
+[data.macos]
+dock_size = 48
+key_repeat_rate = 2
+initial_key_repeat = 15

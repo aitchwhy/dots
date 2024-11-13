@@ -1,0 +1,99 @@
+README.md
+
+*.txt   # ignore *.txt in the target directory
+*/*.txt # ignore *.txt in subdirectories of the target directory
+        # but not in subdirectories of subdirectories;
+        # so a/b/c.txt would *not* be ignored
+
+backups/   # ignore the backups folder, but not its contents
+backups/** # ignore the contents of backups folder but not the folder itself
+
+{{- if ne .email "firstname.lastname@company.com" }}
+# Ignore .company-directory unless configured with a company email
+.company-directory # note that the pattern is not dot_company-directory
+{{- end }}
+
+{{- if ne .email "me@home.org" }}
+.personal-file
+{{- end }}
+
+
+# ~/.local/share/chezmoi/.chezmoiignore
+# Ignore everything by default
+*
+
+# Version control
+.git/
+.gitignore
+.gitmodules
+
+# Temp files
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Explicitly include configurations we want to manage
+!.config/
+!.config/zsh/
+!.config/warp/
+!.config/starship/
+!.config/git/
+!.config/nvim/
+
+# Zsh files
+!.zshenv
+!.zshrc
+!.zprofile
+!.config/zsh/**/*.zsh
+!.config/zsh/functions/
+!.config/zsh/completions/
+
+# Warp configurations
+!.config/warp/themes/
+!.config/warp/launch_configurations/
+!.config/warp/keybindings.yaml
+
+# Starship
+!.config/starship/starship.toml
+
+# Git configurations
+!.config/git/config
+!.config/git/ignore
+!.gitconfig
+
+# Neovim
+!.config/nvim/init.lua
+!.config/nvim/lua/**/*.lua
+
+# Scripts
+!scripts/
+!scripts/install.sh
+!scripts/macos-defaults.sh
+
+# Ignore within allowed paths
+.config/**/node_modules/
+.config/**/.git/
+.config/**/*.log
+.config/**/cache/
+.config/**/__pycache__/
+
+{{ if ne .chezmoi.os "darwin" }}
+# Ignore macOS specific files on non-macOS systems
+.config/warp/
+scripts/macos-defaults.sh
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+# Ignore Linux specific files on non-Linux systems
+.config/i3/
+.config/polybar/
+{{ end }}
