@@ -92,9 +92,12 @@ brew "zsh-syntax-highlighting"
 brew "koekeishiya/formulae/skhd"
 brew "temporalio/brew/tcld"
 cask "boltai"
+<<<<<<< HEAD
+=======
 cask "canva"
 cask "gitkraken-cli"
 cask "google-chrome"
+>>>>>>> 9cecde3 (Update .Brewfile)
 cask "kitty"
 cask "mullvadvpn"
 cask "obsidian"
