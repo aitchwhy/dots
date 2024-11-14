@@ -80,7 +80,6 @@ packages:
       - 'yazi'
       - 'ykman'
       - 'yq'
-      - 'zellij'
       - 'zoxide'
       - 'zsh-autopair'
       - 'zsh-autosuggestions'
