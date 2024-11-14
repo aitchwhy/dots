@@ -1,6 +1,5 @@
 # Login shell settings
 
-export USER="Hank Lee"
 export GITHUB_USER="aitchwhy"
 export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 
