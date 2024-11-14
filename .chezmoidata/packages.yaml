@@ -69,7 +69,6 @@ packages:
       - 'shellcheck'
       - 'speedtest-cli'
       - 'starship'
-      - 'tailscale'
       - 'temporal'
       - 'temporalio/brew/tcld'
       - 'tldr'
