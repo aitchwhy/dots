@@ -101,7 +101,6 @@ cask "obsidian"
 cask "osquery"
 cask "red-canary-mac-monitor"
 cask "tabby"
-cask "tailscale"
 cask "yubico-yubikey-manager"
 mas "Anybox", id: 1593408455
 mas "Apple Configurator", id: 1037126344
