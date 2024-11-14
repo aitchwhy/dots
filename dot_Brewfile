@@ -17,6 +17,7 @@ brew "bat"
 brew "broot"
 brew "cheat"
 brew "chezmoi"
+brew "choose"
 brew "curlie"
 brew "datasette"
 brew "diff-so-fancy"
@@ -49,6 +50,7 @@ brew "just"
 brew "k9s"
 brew "lazygit"
 brew "luarocks"
+brew "mas"
 brew "mcfly"
 brew "miller"
 brew "minio"
@@ -72,7 +74,6 @@ brew "sd"
 brew "shellcheck"
 brew "speedtest-cli"
 brew "starship"
-brew "tailscale"
 brew "temporal"
 brew "tldr"
 brew "trippy"
@@ -89,14 +90,35 @@ brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
+brew "koekeishiya/formulae/skhd"
 brew "temporalio/brew/tcld"
+cask "boltai"
 cask "gitkraken-cli"
 cask "kitty"
 cask "mullvadvpn"
 cask "obsidian"
 cask "osquery"
 cask "red-canary-mac-monitor"
+cask "tabby"
+cask "tailscale"
 cask "yubico-yubikey-manager"
+mas "Anybox", id: 1593408455
+mas "Apple Configurator", id: 1037126344
+mas "Bitwarden", id: 1352778147
+mas "CleanMyMac", id: 1339170533
+mas "Data Jar", id: 1453273600
+mas "Developer", id: 640199958
+mas "Drafts", id: 1435957248
+mas "Fantastical", id: 975937182
+mas "Flow", id: 1423210932
+mas "KakaoTalk", id: 869223134
+mas "Klack", id: 6446206067
+mas "LanScan", id: 472226235
+mas "Logger", id: 1611554653
+mas "Maccy", id: 1527619437
+mas "Paste", id: 967805235
+mas "PasteNow", id: 1552536109
+mas "Tailscale", id: 1475387142
 vscode "eamodio.gitlens"
 vscode "teamhub.teamhub"
 vscode "vscodevim.vim"
