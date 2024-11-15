@@ -2,8 +2,15 @@
 
 #------------------------------------------------------------------------------
 # .zshrc - Zsh file loaded on interactive shell sessions.
+#------------------------------------------------------------------------------
 #
 # NOTE: inspired by https://github.com/getantidote/zdotdir
+#
+# TODO: zsh plugin manager (?) 
+# - https://github.com/zap-zsh/zap
+# - antidote
+
+# TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
 #------------------------------------------------------------------------------
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of .zshrc.
@@ -55,11 +62,6 @@
 # Closing Remarks:
 # This structure optimizes shell performance, ensures modularity through separate sourcing of aliases and functions, and guarantees the necessary tools follow the correct path resolution and locale setup. Future customization will be easier by logically maintaining functions/aliases externally.
 
-# TODO: zsh plugin manager (?) 
-# - https://github.com/zap-zsh/zap
-# - antidote
-
-# TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
 
 #------------------------------------------------------------------------------
 # Early Performance Settings
@@ -83,27 +85,12 @@ setopt extended_glob
 # TODO: zprofile should have already run before this (brew shellenv + core env variables)
 #--------------------------------------------------------
 
-# zsh env vars
-z
-# ${ZDOTDIR:-~}/.zshrc
-
 # Set the root name of the plugins files (.txt and .zsh) antidote will use.
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
-
-export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 
 # Set HOMEBREW_PREFIX if not already set
 # This uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
 export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
-
-#------------------------------------------------------------------------------
-# Locale (Language/Encoding) Configuration
-# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
-#------------------------------------------------------------------------------
-# Set UTF-8 as the globally recognized encoding for system-wide compatibility
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-
 
 # Core environment-specific non-standard paths
 export BUN_INSTALL="$HOME/.bun"
