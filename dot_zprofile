@@ -12,6 +12,6 @@ export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 # make sure inserting zsh/site-functions (eval "$(brew shellenv)") is done BEFORE initialising zsh’s completion init (autoload -Ux compinit && compinit).
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 #------------------------------------------------------------------------------
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(brew shellenv)"
 
