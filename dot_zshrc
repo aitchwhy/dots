@@ -1,17 +1,7 @@
 
-
-
-# TODO: zsh plugin manager (?) 
-# - https://github.com/zap-zsh/zap
-# - antidote
-
-# TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
-
 #--------------------------------------------------------
 # Logical flow for zshrc
 #--------------------------------------------------------
-#
-#
 # - Early Performance/Optimizations (like skip_global_compinit, zprof)
 # - Locale Settings (LANG, LC_ALL)
 # - Path Configurations (typeset -U path)
@@ -49,25 +39,11 @@
 # Closing Remarks:
 # This structure optimizes shell performance, ensures modularity through separate sourcing of aliases and functions, and guarantees the necessary tools follow the correct path resolution and locale setup. Future customization will be easier by logically maintaining functions/aliases externally.
 
-#------------------------------------------------------------------------------
-# Locale (Language/Encoding) Configuration
-# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
-#------------------------------------------------------------------------------
-# Set UTF-8 as the globally recognized encoding for system-wide compatibility
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
+# TODO: zsh plugin manager (?) 
+# - https://github.com/zap-zsh/zap
+# - antidote
 
-#------------------------------------------------------------------------------
-# PATH Configuration (Unique Paths)
-#
-# (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
-# Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
-#------------------------------------------------------------------------------
-
-# Core environment-specific non-standard paths
-export BUN_INSTALL="$HOME/.bun"
-export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
-# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+# TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
 
 #------------------------------------------------------------------------------
 # Early Performance Settings
@@ -87,17 +63,44 @@ setopt extended_glob
 
 # TODO
 # zmodload zsh/zprof  # Uncomment for profiling
+#--------------------------------------------------------
+# TODO: zprofile should have already run before this (brew shellenv + core env variables)
+#--------------------------------------------------------
 
+# Set HOMEBREW_PREFIX if not already set
+# This uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
+export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+
+#------------------------------------------------------------------------------
+# Locale (Language/Encoding) Configuration
+# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
+#------------------------------------------------------------------------------
+# Set UTF-8 as the globally recognized encoding for system-wide compatibility
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+
+# Core environment-specific non-standard paths
+export BUN_INSTALL="$HOME/.bun"
+export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
+# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+
+#------------------------------------------------------------------------------
+# PATH Configuration (Unique Paths)
+#
 # PATHS: Declare path array with unique entries (-U = unique, removes duplicates)
 # Why? 1. Maintains clean $PATH without duplicate entries
 #      2. More efficient than manual PATH string manipulation
 #      3. ZSH-native way to handle paths (better than export PATH=...)
 # Usage: path+=(/new/path)  # Add new paths safely, duplicates auto-removed
+# (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
+# Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
+#------------------------------------------------------------------------------
 typeset -gU path
 
 # TODO: update to use env-var ($HOMEBREW_PREFIX) which is set by brew installation
 # Zsh-native path array handling, avoids duplicate path elements
-typeset -U path
 path=(
     $HOME/.local/bin
     $BUN_INSTALL/bin
@@ -106,6 +109,17 @@ path=(
     $HOME/.cache/lm-studio/bin
     $path # preserve user paths
 )
+
+
+# Initialize path.
+# If dirs are missing, they won't be added due to null globbing.
+path=(
+  $HOME/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $path
+)
+
 
 
 #------------------------------------------------------------------------------
@@ -146,6 +160,8 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 
 #------------------------------------------------------------------------------
 # Completion System Initialization (Load Late to Avoid Reinitialization)
+
+# brew shellenv -> fpath[1,0]="/opt/homebrew/share/zsh/site-functions";
 #------------------------------------------------------------------------------
 # zsh completions initialization
 autoload -Uz compinit
@@ -155,6 +171,15 @@ compinit
 # else
 #     compinit -C;
 # fi
+
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+#
+#   autoload -Uz compinit
+#   compinit
+# fi
+
+
 #
 #------------------------------------------------------------------------------
 # Core Dev Tool Initialization (Order Matters)
@@ -381,6 +406,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # https://github.com/zsh-users/zsh-autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/hlissner/zsh-autopair
 source /opt/homebrew/share/zsh-autopair/autopair.zsh
@@ -394,3 +420,4 @@ source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
 # TODO: zsh-autosuggestions + zsh-abbr integration (https://github.com/olets/zsh-autosuggestions-abbreviations-strategy)
 source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+
