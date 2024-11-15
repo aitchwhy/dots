@@ -374,6 +374,7 @@ alias uvg="source $GLOBAL_PYTHON_VENV/bin/activate"
 # ln -s ~/.config/zsh/.zshrc ~/.zshrc
 
 
+
 # https://github.com/zsh-users/zsh-syntax-highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -389,3 +390,6 @@ source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-se
 # https://zsh-abbr.olets.dev/installation.html
 # source /opt/homebrew/share/zsh-abbr@6/zsh-abbr.zsh
 source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
+
+# TODO: zsh-autosuggestions + zsh-abbr integration (https://github.com/olets/zsh-autosuggestions-abbreviations-strategy)
+source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
