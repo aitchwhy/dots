@@ -148,7 +148,8 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 # Completion System Initialization (Load Late to Avoid Reinitialization)
 #------------------------------------------------------------------------------
 # zsh completions initialization
-autoload -Uz compinit; compinit
+autoload -Uz compinit
+compinit
 # if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
 #     compinit;
 # else
