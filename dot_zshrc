@@ -387,4 +387,5 @@ source /opt/homebrew/share/zsh-autopair/autopair.zsh
 source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # https://zsh-abbr.olets.dev/installation.html
-source /opt/homebrew/share/zsh-abbr@6/zsh-abbr.zsh
+# source /opt/homebrew/share/zsh-abbr@6/zsh-abbr.zsh
+source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
