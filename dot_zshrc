@@ -1,4 +1,10 @@
 
+#------------------------------------------------------------------------------
+# NOTE: inspired by https://github.com/getantidote/zdotdir
+#------------------------------------------------------------------------------
+
+
+
 #--------------------------------------------------------
 # Logical flow for zshrc
 #--------------------------------------------------------
@@ -66,6 +72,15 @@ setopt extended_glob
 #--------------------------------------------------------
 # TODO: zprofile should have already run before this (brew shellenv + core env variables)
 #--------------------------------------------------------
+
+# zsh env vars
+z
+# ${ZDOTDIR:-~}/.zshrc
+
+# Set the root name of the plugins files (.txt and .zsh) antidote will use.
+zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
+
+export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 
 # Set HOMEBREW_PREFIX if not already set
 # This uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
@@ -246,6 +261,11 @@ setopt EXTENDED_GLOB         # Enable advanced globbing in Zsh
 # TODO: Source external modular functions
 # source "$ZDOTDIR/functions.zsh"  # Source functions defined elsewhere
 
+# zsh reload with chezmoi changes
+function reload() {
+    
+}
+
 # Use fzf + bat for filtering large output files (e.g., logs, big text files)
 function fbat() {
   bat --paging=always "$1" | fzf
@@ -393,12 +413,20 @@ alias uvg="source $GLOBAL_PYTHON_VENV/bin/activate"
 #------------------------------------------------------------------------------
 # autoload -U compinit; compinit
 
-#------------------------------------------------------------------------------
-# Clone/copy these files to ~/.config/zsh/
-# Link or copy your .zshrc:
-#------------------------------------------------------------------------------
-# ln -s ~/.config/zsh/.zshrc ~/.zshrc
+# inspo
+# - https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
+# Source any plugins installed via homebrew if found.
+: ${HOMEBREW_PREFIX:=$(brew --prefix 2>/dev/null)}
+zsh_plugins=(
+  $HOMEBREW_PREFIX/etc/bash-completion/completions/git-extras(N)
+  $HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh(N)
+  $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh(N)
+  $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh(N)
+)
+for zfile in $zsh_plugins; source $zfile
 
+# Cleanup.
+unset zsh_plugins zfile
 
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
