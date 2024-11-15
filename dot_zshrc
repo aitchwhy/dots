@@ -449,3 +449,5 @@ source /opt/homebrew/share/zsh-autopair/autopair.zsh
 # https://github.com/zsh-users/zsh-history-substring-search
 source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+# https://zsh-abbr.olets.dev/installation.html
+source /opt/homebrew/share/zsh-abbr@6/zsh-abbr.zsh

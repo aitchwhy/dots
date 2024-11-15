@@ -3,3 +3,6 @@
 export GITHUB_USER="aitchwhy"
 export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 
+# brew zsh completions
+eval "$(brew shellenv)"
+
