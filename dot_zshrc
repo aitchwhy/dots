@@ -49,6 +49,25 @@
 # Closing Remarks:
 # This structure optimizes shell performance, ensures modularity through separate sourcing of aliases and functions, and guarantees the necessary tools follow the correct path resolution and locale setup. Future customization will be easier by logically maintaining functions/aliases externally.
 
+#------------------------------------------------------------------------------
+# Locale (Language/Encoding) Configuration
+# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
+#------------------------------------------------------------------------------
+# Set UTF-8 as the globally recognized encoding for system-wide compatibility
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+#------------------------------------------------------------------------------
+# PATH Configuration (Unique Paths)
+#
+# (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
+# Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
+#------------------------------------------------------------------------------
+
+# Core environment-specific non-standard paths
+export BUN_INSTALL="$HOME/.bun"
+export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
+# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 #------------------------------------------------------------------------------
 # Early Performance Settings
@@ -66,9 +85,6 @@ skip_global_compinit=1
 # Set Zsh opts.
 setopt extended_glob
 
-# Ensure path array contains no duplicates.
-typeset -gU path
-
 # TODO
 # zmodload zsh/zprof  # Uncomment for profiling
 
@@ -77,30 +93,7 @@ typeset -gU path
 #      2. More efficient than manual PATH string manipulation
 #      3. ZSH-native way to handle paths (better than export PATH=...)
 # Usage: path+=(/new/path)  # Add new paths safely, duplicates auto-removed
-typeset -U path
-
-
-#------------------------------------------------------------------------------
-# Locale (Language/Encoding) Configuration
-# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
-#------------------------------------------------------------------------------
-# Set UTF-8 as the globally recognized encoding for system-wide compatibility
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-
-#------------------------------------------------------------------------------
-# PATH Configuration (Unique Paths)
-#
-# (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
-# Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
-#------------------------------------------------------------------------------
-
-
-
-# Core environment-specific non-standard paths
-export BUN_INSTALL="$HOME/.bun"
-export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
-# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+typeset -gU path
 
 # TODO: update to use env-var ($HOMEBREW_PREFIX) which is set by brew installation
 # Zsh-native path array handling, avoids duplicate path elements
@@ -140,11 +133,6 @@ export PAGER='bat --pager=always'  # Bat as the pager for general output
 # Tool Configuration and Exports (bat, fzf, ripgrep)
 #------------------------------------------------------------------------------
 
-# GitHub user settings (replace with your info)
-# https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
-export GITHUB_USER="aitchwhy"
-export GITHUB_EMAIL="hank.lee.qed@gmail.com"
-
 # Fuzzy Find: Set default command for fzf with ripgrep (hidden files included). Use fzf with bat for searching file contents
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -155,17 +143,6 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 # TODO: DevToys dev utils (https://devtoys.app/doc/articles/extension-development/getting-started/setup.html?tabs=macos)
 # export DevToysGuiDebugEntryPoint="/Applications/DevToys.app/Contents/MacOS/DevToys"
 # export DevToysCliDebugEntryPoint="/Applications/DevToys.app/Contents/MacOS/DevToys"
-
-
-#------------------------------------------------------------------------------
-# insert Homebrew-managed zsh completions (in zsh/site-functions) into zsh
-#
-# This is done by inserting the homebrew zsh/site-functions 'path' into $FPATH before zsh's completions are initialized done by eval "$(brew shellenv)"
-# make sure inserting zsh/site-functions (eval "$(brew shellenv)") is done BEFORE initialising zsh’s completion init (autoload -Ux compinit && compinit).
-# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-#------------------------------------------------------------------------------
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(brew shellenv)"
 
 #------------------------------------------------------------------------------
 # Completion System Initialization (Load Late to Avoid Reinitialization)
@@ -179,18 +156,8 @@ autoload -Uz compinit; compinit
 # fi
 #
 #------------------------------------------------------------------------------
-# Core Tool Initialization (Order Matters)
+# Core Dev Tool Initialization (Order Matters)
 #------------------------------------------------------------------------------
-# # Homebrew (first as others might depend on it)
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-#
-# # Language Version Managers
-# eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
-#
-# # Development Tools
-# [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
-# eval "$(uv generate-shell-completion zsh)"
-#
 
 # Node version manager (fnm) initialization
 eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
@@ -379,9 +346,6 @@ alias gdl='cd ~/Downloads'
 alias gcf='cd ~/.config/'
 
 
-
-
-
 alias uvgn="uv venv $GLOBAL_PYTHON_VENV"
 alias uvg="source $GLOBAL_PYTHON_VENV/bin/activate"
 
@@ -402,33 +366,6 @@ alias uvg="source $GLOBAL_PYTHON_VENV/bin/activate"
 # init zsh completions ---> may not need this (use Warp)
 #------------------------------------------------------------------------------
 # autoload -U compinit; compinit
-
-# #------------------------------------------------------------------------------
-# # Dev tooling init
-# #------------------------------------------------------------------------------
-#
-# # Development Tools
-#
-# # fnm (node version manager)
-# eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
-#
-# # zoxide
-# eval "$(zoxide init zsh)"
-#
-# # atuin shell history
-# eval "$(atuin init zsh)"
-#
-# # starship (shell prompt config)
-# eval "$(starship init zsh)"
-#
-# # temporal (duration execution)
-# eval "$(temporal completion zsh)"
-#
-# # uv (python+pip tooling)
-# eval "$(uv generate-shell-completion zsh)"
-#
-# # Bun completion (only load if exists)
-# [ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
 #------------------------------------------------------------------------------
 # Clone/copy these files to ~/.config/zsh/

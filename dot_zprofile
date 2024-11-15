@@ -3,6 +3,15 @@
 export GITHUB_USER="aitchwhy"
 export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 
-# brew zsh completions
+
+
+#------------------------------------------------------------------------------
+# insert Homebrew-managed zsh completions (in zsh/site-functions) into zsh
+#
+# This is done by inserting the homebrew zsh/site-functions 'path' into $FPATH before zsh's completions are initialized done by eval "$(brew shellenv)"
+# make sure inserting zsh/site-functions (eval "$(brew shellenv)") is done BEFORE initialising zsh’s completion init (autoload -Ux compinit && compinit).
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+#------------------------------------------------------------------------------
+# eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(brew shellenv)"
 
