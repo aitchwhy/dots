@@ -1,6 +1,26 @@
 #!/bin/zsh
 
-
 # Local config - from https://github.com/thoughtbot/dotfiles/blob/main/zshenv
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
+
+#------------------------------------------------------------------------------
+# Editor and Pager Configuration
+#------------------------------------------------------------------------------
+
+# Editors + pagers
+export SUDO_EDITOR='nvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# bat as a pager for man pages, with syntax highlighting
+export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
+
+# Alternatively, if you want to use NeoVim for man pages, uncomment this:
+# export MANPAGER="nvim +Man!"
+
+# For using less with color and proper UTF-8 formatting as the default pager:
+# Ensure less behaves well with color and UTF-8 content
+export LESS='-R -i'
+export LESSCHARSET=utf-8
+export PAGER='bat --pager=always'  # Bat as the pager for general output
 
