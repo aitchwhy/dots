@@ -5,6 +5,38 @@
 export GITHUB_USER="aitchwhy"
 export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 
+###########################################
+#
+# link : https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
+#
+# # Set Zsh opts.
+# setopt extended_glob
+#
+# # Ensure path array contains no duplicates.
+# typeset -gU path
+#
+# # Initialize path.
+# # If dirs are missing, they won't be added due to null globbing.
+# path=(
+#   $HOME/{,s}bin(N)
+#   /opt/{homebrew,local}/{,s}bin(N)
+#   /usr/local/{,s}bin(N)
+#   $path
+# )
+#
+# # Source any plugins installed via homebrew if found.
+# : ${HOMEBREW_PREFIX:=$(brew --prefix 2>/dev/null)}
+# zsh_plugins=(
+#   $HOMEBREW_PREFIX/etc/bash-completion/completions/git-extras(N)
+#   $HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh(N)
+#   $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh(N)
+#   $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh(N)
+# )
+# for zfile in $zsh_plugins; source $zfile
+#
+# # Cleanup.
+# unset zsh_plugins zfile
+###########################################
 
 
 #------------------------------------------------------------------------------
@@ -60,7 +92,6 @@ export BUN_INSTALL="$HOME/.bun"
 export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
 # export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
-
 #------------------------------------------------------------------------------
 # PATH Configuration (Unique Paths)
 #
@@ -90,33 +121,12 @@ path=(
 # If dirs are missing, they won't be added due to null globbing.
 path=(
   $HOME/{,s}bin(N)
+  $HOME/.local/{,s}bin(N)
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
+  $HOME/.cache/lm-studio/bin
   $path
 )
-
-
-
-#------------------------------------------------------------------------------
-# Editor and Pager Configuration
-#------------------------------------------------------------------------------
-
-# Editors + pagers
-export SUDO_EDITOR='nvim'
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-# bat as a pager for man pages, with syntax highlighting
-export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
-
-# Alternatively, if you want to use NeoVim for man pages, uncomment this:
-# export MANPAGER="nvim +Man!"
-
-# For using less with color and proper UTF-8 formatting as the default pager:
-# Ensure less behaves well with color and UTF-8 content
-export LESS='-R -i'
-export LESSCHARSET=utf-8
-export PAGER='bat --pager=always'  # Bat as the pager for general output
 
 
 
@@ -129,4 +139,8 @@ export PAGER='bat --pager=always'  # Bat as the pager for general output
 #------------------------------------------------------------------------------
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # eval "$(brew shellenv)"
+
+
+
+
 

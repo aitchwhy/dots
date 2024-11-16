@@ -81,79 +81,7 @@ setopt extended_glob
 
 # TODO
 # zmodload zsh/zprof  # Uncomment for profiling
-#--------------------------------------------------------
-# TODO: zprofile should have already run before this (brew shellenv + core env variables)
-#--------------------------------------------------------
 
-# Set the root name of the plugins files (.txt and .zsh) antidote will use.
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
-
-# Set HOMEBREW_PREFIX if not already set
-# This uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
-export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
-
-# Core environment-specific non-standard paths
-export BUN_INSTALL="$HOME/.bun"
-export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
-# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-
-
-#------------------------------------------------------------------------------
-# PATH Configuration (Unique Paths)
-#
-# PATHS: Declare path array with unique entries (-U = unique, removes duplicates)
-# Why? 1. Maintains clean $PATH without duplicate entries
-#      2. More efficient than manual PATH string manipulation
-#      3. ZSH-native way to handle paths (better than export PATH=...)
-# Usage: path+=(/new/path)  # Add new paths safely, duplicates auto-removed
-# (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
-# Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
-#------------------------------------------------------------------------------
-typeset -gU path
-
-# TODO: update to use env-var ($HOMEBREW_PREFIX) which is set by brew installation
-# Zsh-native path array handling, avoids duplicate path elements
-path=(
-    $HOME/.local/bin
-    $BUN_INSTALL/bin
-    $GLOBAL_PYTHON_VENV/bin
-    /opt/homebrew/bin
-    $HOME/.cache/lm-studio/bin
-    $path # preserve user paths
-)
-
-
-# Initialize path.
-# If dirs are missing, they won't be added due to null globbing.
-path=(
-  $HOME/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  $path
-)
-
-
-
-#------------------------------------------------------------------------------
-# Editor and Pager Configuration
-#------------------------------------------------------------------------------
-
-# Editors + pagers
-export SUDO_EDITOR='nvim'
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-# bat as a pager for man pages, with syntax highlighting
-export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
-
-# Alternatively, if you want to use NeoVim for man pages, uncomment this:
-# export MANPAGER="nvim +Man!"
-
-# For using less with color and proper UTF-8 formatting as the default pager:
-# Ensure less behaves well with color and UTF-8 content
-export LESS='-R -i'
-export LESSCHARSET=utf-8
-export PAGER='bat --pager=always'  # Bat as the pager for general output
 
 #------------------------------------------------------------------------------
 # Tool Configuration and Exports (bat, fzf, ripgrep)
