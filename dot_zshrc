@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 #--------------------------------------------------------
 # Logical flow for code (zshenv + zprofile + zshrc altogether here)
 #--------------------------------------------------------
@@ -41,6 +40,7 @@
 # Closing Remarks:
 # This structure optimizes shell performance, ensures modularity through separate sourcing of aliases and functions, and guarantees the necessary tools follow the correct path resolution and locale setup. Future customization will be easier by logically maintaining functions/aliases externally.
 
+
 #------------------------------------------------------------------------------
 # Early Performance Settings
 #------------------------------------------------------------------------------
@@ -60,6 +60,17 @@ setopt extended_glob
 # TODO
 # zmodload zsh/zprof  # Uncomment for profiling
 
+
+# History and option settings
+setopt HIST_IGNORE_DUPS      # Ignore duplicate entries in history
+setopt HIST_IGNORE_SPACE     # Ignore commands prefixed by space
+setopt HIST_VERIFY           # Edit actions before execution (after Up arrow)
+
+# Zsh navigation tweaks
+setopt AUTO_CD               # Automatically `cd` when typing a directory name
+setopt AUTO_PUSHD            # Automatically push directories onto the stack
+setopt PUSHD_IGNORE_DUPS     # Ignore duplicate directories in the stack
+setopt EXTENDED_GLOB         # Enable advanced globbing in Zsh
 
 
 
@@ -96,6 +107,16 @@ export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
 # Alternatively, if you want to use NeoVim for man pages, uncomment this:
 # export MANPAGER="nvim +Man!"
 
+#--------------
+# Shell History and Essential Options
+# 
+# TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
+#-------------
+
+# Set history file and size limits
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
 #------------------------------------------------------------------------------
 # Locale (Language/Encoding) Configuration + Editors + pagers (could be .zshenv)
 # NOTE: **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
@@ -168,19 +189,35 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 export GITHUB_USER="aitchwhy"
 export GITHUB_EMAIL="hank.lee.qed@gmail.com"
 
-# # Source any plugins installed via homebrew if found.
-# : ${HOMEBREW_PREFIX:=$(brew --prefix 2>/dev/null)}
+# inspo
+# - https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
+# TODO: Source any plugins installed via homebrew if found.
+: ${HOMEBREW_PREFIX:=$(brew --prefix 2>/dev/null)}
 zsh_plugins=(
-  $HOMEBREW_PREFIX/etc/bash-completion/completions/git-extras(N)
-  $HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh(N)
-  $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh(N)
-  $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh(N)
+   $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh(N)
+
+   # https://github.com/zsh-users/zsh-autosuggestions
+   $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh(N)
+
+   # https://github.com/hlissner/zsh-autopair
+   $HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh(N)
+
+   # https://github.com/zsh-users/zsh-history-substring-search
+   $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+   # https://zsh-abbr.olets.dev/installation.html
+   $HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh
+
+   # TODO: zsh-autosuggestions + zsh-abbr integration (https://github.com/olets/zsh-autosuggestions-abbreviations-strategy)
+   # $HOMEBREW_PREFIX/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
+
+   # $HOMEBREW_PREFIX/etc/bash-completion/completions/git-extras(N)
+   # $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh(N)
 )
 for zfile in $zsh_plugins; source $zfile
 
 # Cleanup.
 unset zsh_plugins zfile
-###########################################
 
 #------------------------------------------------------------------------------
 # Tool Configuration and Exports (bat, fzf, ripgrep)
@@ -199,10 +236,18 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 
 #------------------------------------------------------------------------------
 # Completion System Initialization (Load Late to Avoid Reinitialization)
-
 # brew shellenv -> fpath[1,0]="/opt/homebrew/share/zsh/site-functions";
 #------------------------------------------------------------------------------
-# zsh completions initialization
+
+# TODO: brew zsh-completions
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+#
+#   autoload -Uz compinit
+#   compinit
+# fi
+
+# zsh completions initialization (TODO: antidote)
 autoload -Uz compinit
 compinit
 # if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
@@ -211,15 +256,7 @@ compinit
 #     compinit -C;
 # fi
 
-# if type brew &>/dev/null; then
-#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-#
-#   autoload -Uz compinit
-#   compinit
-# fi
 
-
-#
 #------------------------------------------------------------------------------
 # Core Dev Tool Initialization (Order Matters)
 #------------------------------------------------------------------------------
@@ -256,27 +293,6 @@ eval "$(starship init zsh)"
 # Create global venv (if not exist)
 # uv venv ~/.python-global
 
-#------------------------------------------------------------------------------
-# Shell History and Essential Options
-# 
-# TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
-#------------------------------------------------------------------------------
-
-# Set history file and size limits
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
-
-# History and option settings
-setopt HIST_IGNORE_DUPS      # Ignore duplicate entries in history
-setopt HIST_IGNORE_SPACE     # Ignore commands prefixed by space
-setopt HIST_VERIFY           # Edit actions before execution (after Up arrow)
-
-# Zsh navigation tweaks
-setopt AUTO_CD               # Automatically `cd` when typing a directory name
-setopt AUTO_PUSHD            # Automatically push directories onto the stack
-setopt PUSHD_IGNORE_DUPS     # Ignore duplicate directories in the stack
-setopt EXTENDED_GLOB         # Enable advanced globbing in Zsh
 
 #------------------------------------------------------------------------------
 # Custom Functions (Separate File Sourcing for Modularity)
@@ -287,7 +303,8 @@ setopt EXTENDED_GLOB         # Enable advanced globbing in Zsh
 
 # zsh reload with chezmoi changes
 function reload() {
-    
+    zs
+    echo "Reloaded"
 }
 
 # Use fzf + bat for filtering large output files (e.g., logs, big text files)
@@ -421,6 +438,7 @@ alias uvg="source $GLOBAL_PYTHON_VENV/bin/activate"
 
 #------------------------------------------------------------------------------
 # TODO: command cheatsheet (use cheat CLI command)
+# TODO: zsh-abbr shortcuts
 #------------------------------------------------------------------------------
 # $ ln -s ~/.config/zsh/.zshrc ~/.zshrc
 # $ nvim <file>	Opens NeoVim in the terminal to edit the given file.
@@ -430,60 +448,3 @@ alias uvg="source $GLOBAL_PYTHON_VENV/bin/activate"
 # $ fman	fzf-based man page search: Quickly search and preview man pages, select using fuzzy find and preview.
 # $ man <command>	Opens bat-enhanced man pages with syntax highlighting and nice paging.
 
-
-
-#------------------------------------------------------------------------------
-# init zsh completions ---> may not need this (use Warp)
-#------------------------------------------------------------------------------
-# autoload -U compinit; compinit
-
-# inspo
-# - https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
-# Source any plugins installed via homebrew if found.
-: ${HOMEBREW_PREFIX:=$(brew --prefix 2>/dev/null)}
-zsh_plugins=(
-  $HOMEBREW_PREFIX/etc/bash-completion/completions/git-extras(N)
-  $HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh(N)
-  $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh(N)
-  $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh(N)
-)
-for zfile in $zsh_plugins; source $zfile
-
-# Cleanup.
-unset zsh_plugins zfile
-
-
-# https://github.com/zsh-users/zsh-syntax-highlighting
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# https://github.com/zsh-users/zsh-autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# https://github.com/hlissner/zsh-autopair
-source /opt/homebrew/share/zsh-autopair/autopair.zsh
-
-# https://github.com/zsh-users/zsh-history-substring-search
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-# https://zsh-abbr.olets.dev/installation.html
-# source /opt/homebrew/share/zsh-abbr@6/zsh-abbr.zsh
-source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
-
-# TODO: zsh-autosuggestions + zsh-abbr integration (https://github.com/olets/zsh-autosuggestions-abbreviations-strategy)
-source /opt/homebrew/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
-
-
-
-
-
-########################################
-# TODO: Source anything in .zshrc.d.
-########################################
-for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
-  # Ignore tilde files.
-  if [[ $_rc:t != '~'* ]]; then
-    source "$_rc"
-  fi
-done
-unset _rc
