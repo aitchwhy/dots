@@ -1,4 +1,146 @@
 #!/bin/zsh
+#################################################
+# env vars (could be .zshenv)
+#
+#################################################
+
+# Local config - from https://github.com/thoughtbot/dotfiles/blob/main/zshenv
+[[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
+
+#------------------------------------------------------------------------------
+# Editor and Pager Configuration
+#------------------------------------------------------------------------------
+
+# Editors + pagers
+export SUDO_EDITOR='nvim'
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# bat as a pager for man pages, with syntax highlighting
+export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
+
+# Alternatively, if you want to use NeoVim for man pages, uncomment this:
+# export MANPAGER="nvim +Man!"
+
+# For using less with color and proper UTF-8 formatting as the default pager:
+# Ensure less behaves well with color and UTF-8 content
+export LESS='-R -i'
+export LESSCHARSET=utf-8
+export PAGER='bat --pager=always'  # Bat as the pager for general output
+
+
+# Login shell settings
+
+# TODO: from https://github.com/holman/dotfiles/blob/master/zsh/zshrc.symlink
+
+###########################################
+#
+# link : https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
+#
+
+
+#------------------------------------------------------------------------------
+# Locale (Language/Encoding) Configuration
+# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
+#------------------------------------------------------------------------------
+# Set UTF-8 as the globally recognized encoding for system-wide compatibility
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+export LANG=en_US.UTF-8  # Important for character encoding
+
+
+#------------------------------------------------------------------------------
+# .zshenv - Zsh environment file, loaded always. (inspired by https://github.com/getantidote/zdotdir)
+# 
+# NOTE: .zshenv needs to live at ~/.zshenv, not in $ZDOTDIR!
+#------------------------------------------------------------------------------
+
+# Set ZDOTDIR if you want to re-home Zsh.
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU path fpath
+
+# Set the list of directories that zsh searches for commands
+# these are env var that should be loaded for all shell types
+path=(
+  $HOME/{,s}bin(N)
+  $HOME/.local/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $path
+)
+
+
+#--------------------------------------------------------
+# TODO: zprofile should have already run before this (brew shellenv + core env variables)
+#--------------------------------------------------------
+
+# Set the root name of the plugins files (.txt and .zsh) antidote will use.
+zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
+
+# Set HOMEBREW_PREFIX if not already set
+# This uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
+export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
+
+# Core environment-specific non-standard paths
+export BUN_INSTALL="$HOME/.bun"
+export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
+# export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+#------------------------------------------------------------------------------
+# PATH Configuration (Unique Paths)
+#
+# PATHS: Declare path array with unique entries (-U = unique, removes duplicates)
+# Why? 1. Maintains clean $PATH without duplicate entries
+#      2. More efficient than manual PATH string manipulation
+#      3. ZSH-native way to handle paths (better than export PATH=...)
+# Usage: path+=(/new/path)  # Add new paths safely, duplicates auto-removed
+# (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
+# Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
+#------------------------------------------------------------------------------
+typeset -gU path
+
+# TODO: update to use env-var ($HOMEBREW_PREFIX) which is set by brew installation
+# Zsh-native path array handling, avoids duplicate path elements
+path=(
+    $HOME/.local/bin
+    $BUN_INSTALL/bin
+    $GLOBAL_PYTHON_VENV/bin
+    /opt/homebrew/bin
+    $HOME/.cache/lm-studio/bin
+    $path # preserve user paths
+)
+
+
+# Initialize path.
+# If dirs are missing, they won't be added due to null globbing.
+path=(
+  $HOME/{,s}bin(N)
+  $HOME/.local/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $HOME/.cache/lm-studio/bin
+  $path
+)
+
+
+
+#------------------------------------------------------------------------------
+# insert Homebrew-managed zsh completions (in zsh/site-functions) into zsh
+#
+# This is done by inserting the homebrew zsh/site-functions 'path' into $FPATH before zsh's completions are initialized done by eval "$(brew shellenv)"
+# make sure inserting zsh/site-functions (eval "$(brew shellenv)") is done BEFORE initialising zsh’s completion init (autoload -Ux compinit && compinit).
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+#------------------------------------------------------------------------------
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(brew shellenv)"
+
+
 
 #------------------------------------------------------------------------------
 # .zshrc - Zsh file loaded on interactive shell sessions.
@@ -12,6 +154,39 @@
 
 # TODO: https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
 #------------------------------------------------------------------------------
+
+export GITHUB_USER="aitchwhy"
+export GITHUB_EMAIL="hank.lee.qed@gmail.com"
+
+# # Set Zsh opts.
+# setopt extended_glob
+#
+# # Ensure path array contains no duplicates.
+# typeset -gU path
+#
+# # Initialize path.
+# # If dirs are missing, they won't be added due to null globbing.
+# path=(
+#   $HOME/{,s}bin(N)
+#   /opt/{homebrew,local}/{,s}bin(N)
+#   /usr/local/{,s}bin(N)
+#   $path
+# )
+#
+# # Source any plugins installed via homebrew if found.
+# : ${HOMEBREW_PREFIX:=$(brew --prefix 2>/dev/null)}
+# zsh_plugins=(
+#   $HOMEBREW_PREFIX/etc/bash-completion/completions/git-extras(N)
+#   $HOMEBREW_PREFIX/share/zsh-autopair/autopair.zsh(N)
+#   $HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh(N)
+#   $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh(N)
+# )
+# for zfile in $zsh_plugins; source $zfile
+#
+# # Cleanup.
+# unset zsh_plugins zfile
+###########################################
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of .zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
