@@ -1,93 +1,60 @@
 #!/bin/zsh
+
 #################################################
-# env vars (could be .zshenv)
-#
-#################################################
+# TODO: from https://github.com/holman/dotfiles/blob/master/zsh/zshrc.symlink
+# link : https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
+#------------------------------------------------------------------------------
+# TODO: local .zshenv env vars if any
+#------------------------------------------------------------------------------
 
 # Local config - from https://github.com/thoughtbot/dotfiles/blob/main/zshenv
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
 
 #------------------------------------------------------------------------------
-# Editor and Pager Configuration
+# Locale (Language/Encoding) Configuration + Editors + pagers (could be .zshenv)
+# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
+# Set UTF-8 as the globally recognized encoding for system-wide compatibility
 #------------------------------------------------------------------------------
 
-# Editors + pagers
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
 export SUDO_EDITOR='nvim'
 export EDITOR='nvim'
 export VISUAL='nvim'
-
-# bat as a pager for man pages, with syntax highlighting
-export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
-
-# Alternatively, if you want to use NeoVim for man pages, uncomment this:
-# export MANPAGER="nvim +Man!"
 
 # For using less with color and proper UTF-8 formatting as the default pager:
 # Ensure less behaves well with color and UTF-8 content
 export LESS='-R -i'
 export LESSCHARSET=utf-8
 export PAGER='bat --pager=always'  # Bat as the pager for general output
-
-
-# Login shell settings
-
-# TODO: from https://github.com/holman/dotfiles/blob/master/zsh/zshrc.symlink
-
-###########################################
-#
-# link : https://www.reddit.com/r/zsh/comments/11v07m1/how_to_set_up_zshrc_to_be_used_on_macos_homebrew/
-#
+# bat as a pager for man pages, with syntax highlighting
+export MANPAGER="sh -c 'col -bx | bat --paging=always --language=man'"
+# Alternatively, if you want to use NeoVim for man pages, uncomment this:
+# export MANPAGER="nvim +Man!"
 
 
 #------------------------------------------------------------------------------
-# Locale (Language/Encoding) Configuration
-# - **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
+# Locale (Language/Encoding) Configuration + Editors + pagers (could be .zshenv)
+# NOTE: **Locale settings** and global encoding like `LANG` and `LC_ALL` should stay **towards the top** as they define environment behavior early.
+# NOTE: Set UTF-8 as the globally recognized encoding for system-wide compatibility
 #------------------------------------------------------------------------------
-# Set UTF-8 as the globally recognized encoding for system-wide compatibility
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
 
-export LANG=en_US.UTF-8  # Important for character encoding
-
-
-#------------------------------------------------------------------------------
-# .zshenv - Zsh environment file, loaded always. (inspired by https://github.com/getantidote/zdotdir)
-# 
-# NOTE: .zshenv needs to live at ~/.zshenv, not in $ZDOTDIR!
-#------------------------------------------------------------------------------
+# Below uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
 
 # Set ZDOTDIR if you want to re-home Zsh.
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU path fpath
-
-# Set the list of directories that zsh searches for commands
-# these are env var that should be loaded for all shell types
-path=(
-  $HOME/{,s}bin(N)
-  $HOME/.local/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  $path
-)
-
-
-#--------------------------------------------------------
-# TODO: zprofile should have already run before this (brew shellenv + core env variables)
-#--------------------------------------------------------
 
 # Set the root name of the plugins files (.txt and .zsh) antidote will use.
+export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
 
 # Set HOMEBREW_PREFIX if not already set
-# This uses the ${parameter:-word} syntax -> use "parameter" if set, else use "word"
 export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 
-# Core environment-specific non-standard paths
+# Non-standard CORE environment-specific paths (e.g. tool/lang specific)
 export BUN_INSTALL="$HOME/.bun"
 export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
 # export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
@@ -103,31 +70,22 @@ export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
 # (typeset -U path) : a good **Zsh-native way** to handle paths. Make sure the `path` array settings are done once.
 # Define **`typeset -U path`** early, include all complex paths, and **avoid repetitive export PATH statements** mid-way through the file (e.g. "export PATH=$BUN_INSTALL/bin:$PATH").
 #------------------------------------------------------------------------------
-typeset -gU path
+# Ensure path (binaries) + fpath (completions) arrays do not contain duplicates.
+typeset -gU path fpath
 
-# TODO: update to use env-var ($HOMEBREW_PREFIX) which is set by brew installation
-# Zsh-native path array handling, avoids duplicate path elements
-path=(
-    $HOME/.local/bin
-    $BUN_INSTALL/bin
-    $GLOBAL_PYTHON_VENV/bin
-    /opt/homebrew/bin
-    $HOME/.cache/lm-studio/bin
-    $path # preserve user paths
-)
-
-
-# Initialize path.
+# Init the list of directories that zsh searches for commands
 # If dirs are missing, they won't be added due to null globbing.
 path=(
   $HOME/{,s}bin(N)
   $HOME/.local/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
+  $HOMEBREW_PREFIX/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  $BUN_INSTALL/bin
+  $GLOBAL_PYTHON_VENV/bin
   /usr/local/{,s}bin(N)
   $HOME/.cache/lm-studio/bin
   $path
 )
-
 
 
 #------------------------------------------------------------------------------
