@@ -13,7 +13,6 @@
 # - Shell Options/Enhancements (history, shell behaviors, zoxide, atuin, etc.)
 # - Functions and Aliases
 # - Final Commands or Misc Tools
-#
 
 # Explanation of Key Updates
 # Path Configuration Cleanup:
@@ -60,6 +59,9 @@ setopt extended_glob
 # TODO
 # zmodload zsh/zprof  # Uncomment for profiling
 
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY
+setopt HIST_SAVE_NO_DUPS
 
 # History and option settings
 setopt HIST_IGNORE_DUPS      # Ignore duplicate entries in history
@@ -409,7 +411,6 @@ alias brein="brew reinstall"
 alias bi="brew info"
 alias bo="brew outdated"
 alias bsd="brew search --eval-all --desc"
-
 
 # Homebrew Cask operations
 alias bcl="brew list --cask"
