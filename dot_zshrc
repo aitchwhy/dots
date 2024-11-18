@@ -402,8 +402,8 @@ alias dc='docker-compose'
 alias dps='docker ps'
 
 # Zsh+Chezmoi shortcuts for managing dotfiles
-alias ze="chezmoi edit ~/.zshrc --apply"
-alias zs="chezmoi apply -v ~/.zshrc"
+alias ze="chezmoi edit ~/.zshrc --apply && source ~/.zshrc"
+alias zs="chezmoi apply -v ~/.zshrc && source ~/.zshrc"
 
 # rebuild_zsh_completions
 alias zcompreset="rm -f ~/.zcompdump; compinit"
