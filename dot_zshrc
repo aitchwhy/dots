@@ -240,7 +240,7 @@ zsh_plugins=(
    $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
    # https://zsh-abbr.olets.dev/installation.html
-   $HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh
+   # $HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh
 
    # TODO: zsh-autosuggestions + zsh-abbr integration (https://github.com/olets/zsh-autosuggestions-abbreviations-strategy)
    # $HOMEBREW_PREFIX/share/zsh-autosuggestions-abbreviations-strategy/zsh-autosuggestions-abbreviations-strategy.zsh
