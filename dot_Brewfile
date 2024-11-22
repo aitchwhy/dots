@@ -106,6 +106,7 @@ brew "temporalio/brew/tcld"
 # Casks (GUI apps)
 ##################################
 
+cask "tailscale"
 cask "zen-browser"
 cask "forklift"
 cask "karabiner-elements"
@@ -171,7 +172,7 @@ mas "LanScan", id: 472226235
 mas "Logger", id: 1611554653
 mas "Maccy", id: 1527619437
 mas "Paste", id: 967805235
-mas "Tailscale", id: 1475387142
+# mas "Tailscale", id: 1475387142
 mas "Mela – Recipe Manager", id: 1568924476
 mas "Ice Cubes for Mastodon", id: 6444915884
 
