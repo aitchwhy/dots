@@ -1,17 +1,3 @@
-# Would uninstall casks:
-# adobe-acrobat-pro       cleanshot               dadroit-json-viewer     lunar
-# alacritty               commander-one           deepl                   rapidapi
-# cardhop                 cursor                  logitech-options        zoom
-# Would uninstall formulae:
-# bash                    httpie                  nvm                     tailscale
-# bitwarden-cli           libassuan@2             pinentry-mac            wireshark
-# datasette               libmaxminddb            podman                  xcodes
-# direnv                  libnghttp3              rye                     ykman
-# fx                      libsmi                  speexdsp                olets/tap/zsh-abbr@6
-# Would untap:
-# homebrew/aliases
-# Run `brew bundle cleanup --force` to make these changes.
-
 
 ##################################
 # Taps
@@ -137,6 +123,8 @@ brew "speexdsp"
 # Casks (GUI apps)
 ##################################
 
+cask "mist"
+cask "ghidra"
 cask "cleanshot"
 cask "zoom"
 cask "cardhop"
