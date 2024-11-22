@@ -1,3 +1,7 @@
+##################################
+# Taps
+##################################
+
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "koekeishiya/formulae"
@@ -5,6 +9,11 @@ tap "olets/tap"
 tap "temporalio/brew"
 tap "typesense/tap"
 tap "xo/xo"
+
+##################################
+# Formulas / brews
+##################################
+
 brew "act"
 brew "actionlint"
 brew "aider"
@@ -93,9 +102,13 @@ brew "koekeishiya/formulae/skhd"
 brew "olets/tap/zsh-abbr"
 brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"
 brew "temporalio/brew/tcld"
+
+##################################
+# Casks (GUI apps)
+##################################
+
 cask "swish"
 cask "motrix"
-cask ""
 cask "lyn"
 cask "orbstack"
 cask "itsycal"
@@ -139,6 +152,11 @@ cask "visual-studio-code"
 cask "tabby"
 cask "ollama"
 cask "yubico-yubikey-manager"
+
+##################################
+# Mac App Store (mas CLI) apps
+##################################
+
 mas "Anybox", id: 1593408455
 mas "Apple Configurator", id: 1037126344
 mas "Bitwarden", id: 1352778147
@@ -153,6 +171,12 @@ mas "Maccy", id: 1527619437
 mas "Paste", id: 967805235
 mas "Tailscale", id: 1475387142
 mas "Mela – Recipe Manager", id: 1568924476
+mas "Ice Cubes for Mastodon", id: 6444915884
+
+##################################
+# VSCode / Cursor extensions
+##################################
+
 vscode "eamodio.gitlens"
 vscode "teamhub.teamhub"
 vscode "vscodevim.vim"
