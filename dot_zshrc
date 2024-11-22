@@ -139,6 +139,15 @@ zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
 # Set HOMEBREW_PREFIX if not already set
 export HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 
+# Ensure Homebrew prefix is set correctly for the architecture
+if [[ -z "$HOMEBREW_PREFIX" ]]; then
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        export HOMEBREW_PREFIX="/opt/homebrew"
+    else
+        export HOMEBREW_PREFIX="/usr/local"
+    fi
+fi
+
 # Non-standard CORE environment-specific paths (e.g. tool/lang specific)
 export BUN_INSTALL="$HOME/.bun"
 export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
@@ -163,16 +172,39 @@ typeset -gU path fpath
 # Init the list of directories that zsh searches for commands
 # If dirs are missing, they won't be added due to null globbing.
 path=(
-  $HOME/{,s}bin(N)
-  $HOME/.local/{,s}bin(N)
-  $HOMEBREW_PREFIX/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  $BUN_INSTALL/bin
-  $GLOBAL_PYTHON_VENV/bin
-  /usr/local/{,s}bin(N)
-  $HOME/.cache/lm-studio/bin
-  $path
+    # Homebrew paths (using the pre-defined HOMEBREW_PREFIX)
+    $HOMEBREW_PREFIX/{,s}bin(N)
+
+    # /usr/local (Apple Silicon Mac : different from HOMEBREW_PREFIX so need explicit addition)
+    /usr/local/{,s}bin(N)
+
+    # User-specific binaries
+    $HOME/.local/{,s}bin(N)
+    $HOME/{,s}bin(N)
+        
+    # Language/tool-specific paths
+    $BUN_INSTALL/bin(N)
+    $GLOBAL_PYTHON_VENV/bin(N)
+    $HOME/.cargo/bin(N)           # Rust
+    $HOME/.deno/bin(N)           # Deno
+    $HOME/go/bin(N)              # Go
+    
+    # App-specific paths
+    $HOME/.cache/lm-studio/bin(N)
+
+    # System paths (lower priority)
+    /usr/{,s}bin(N)
+    /{,s}bin(N)
+
+    # Inherit existing PATH
+    $path
 )
+
+# TODO: above paths
+# # /usr/local only if different from HOMEBREW_PREFIX
+# # This conditional addition prevents duplicate paths on Intel Macs (vs Apple Silicon Macs)
+# ${${:-/usr/local/bin}:#$HOMEBREW_PREFIX/bin}(N)
+# ${${:-/usr/local/sbin}:#$HOMEBREW_PREFIX/sbin}(N)
 
 #------------------------------------------------------------------------------
 # insert Homebrew-managed zsh completions (in zsh/site-functions) into zsh
