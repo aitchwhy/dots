@@ -60,7 +60,6 @@ brew "jq"
 brew "just"
 brew "k9s"
 brew "kanata"
-brew "karabiner-elements"
 brew "lazygit"
 brew "luarocks"
 brew "mas"
@@ -107,6 +106,7 @@ brew "temporalio/brew/tcld"
 # Casks (GUI apps)
 ##################################
 
+cask "karabiner-elements"
 cask "swish"
 cask "motrix"
 cask "lyn"
