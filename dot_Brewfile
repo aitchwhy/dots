@@ -93,6 +93,9 @@ brew "koekeishiya/formulae/skhd"
 brew "olets/tap/zsh-abbr"
 brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"
 brew "temporalio/brew/tcld"
+cask "swish"
+cask "motrix"
+cask ""
 cask "lyn"
 cask "orbstack"
 cask "itsycal"
@@ -149,6 +152,7 @@ mas "Logger", id: 1611554653
 mas "Maccy", id: 1527619437
 mas "Paste", id: 967805235
 mas "Tailscale", id: 1475387142
+mas "Mela – Recipe Manager", id: 1568924476
 vscode "eamodio.gitlens"
 vscode "teamhub.teamhub"
 vscode "vscodevim.vim"
