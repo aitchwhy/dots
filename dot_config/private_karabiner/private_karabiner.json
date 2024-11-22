@@ -286,10 +286,6 @@
             "name": "Keychron Q14 profile",
             "selected": true,
             "simple_modifications": [
-                {
-                    "from": { "apple_vendor_top_case_key_code": "keyboard_fn" },
-                    "to": [{ "apple_vendor_keyboard_key_code": "spotlight" }]
-                }
             ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         },
