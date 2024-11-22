@@ -106,6 +106,7 @@ brew "temporalio/brew/tcld"
 # Casks (GUI apps)
 ##################################
 
+cask "zen-browser"
 cask "forklift"
 cask "karabiner-elements"
 cask "swish"
