@@ -459,6 +459,10 @@ alias bbls="brew bundle dump --all --file=- --verbose"
 alias bbsave="brew bundle dump --all --verbose --global -f && chezmoi re-add ~/.Brewfile"
 alias bbcheck="brew bundle check --all --global  --verbose"
 
+
+# Tailscale VPN
+alias ts="tailscale"
+
 #------------------------------------------------------------------------------
 # TODO: Sourcing Additional Files/External Scripts (For Modularity)
 #------------------------------------------------------------------------------
