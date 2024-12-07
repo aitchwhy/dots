@@ -153,6 +153,7 @@ export BUN_INSTALL="$HOME/.bun"
 export GLOBAL_PYTHON_VENV="$HOME/src/.python-global"
 # export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+
 #------------------------------------------------------------------------------
 # .zprofile type code
 #
@@ -305,6 +306,9 @@ eval "$(fnm env --use-on-cd --version-file-strategy recursive --shell zsh)"
 eval "$(uv generate-shell-completion zsh)"
 
 # TODO: safer storage + handling secrets auth + credential
+
+
+
 
 #------------------------------------------------------------------------------
 # Shell Enhancements (zoxide, history extensions)
