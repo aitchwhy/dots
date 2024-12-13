@@ -116,6 +116,7 @@ cask "carbon-copy-cloner"
 cask "cardhop"
 cask "chatgpt"
 cask "claude"
+cask "commander-one"
 cask "copilot"
 cask "dash"
 cask "devtoys"
@@ -135,7 +136,6 @@ cask "itsycal"
 cask "kaleidoscope"
 cask "karabiner-elements"
 cask "keymapp"
-cask "kitty"
 cask "little-snitch"
 cask "lm-studio"
 cask "lyn"
@@ -145,50 +145,51 @@ cask "motrix"
 cask "mullvadvpn"
 cask "obsidian"
 cask "ollama"
-cask "orbstack"
 cask "osquery"
 cask "pdf-expert"
+cask "proton-drive"
 cask "proton-mail"
+cask "proton-pass"
+cask "protonmail-bridge"
+cask "protonvpn"
 cask "proxyman"
 cask "qlmarkdown"
 cask "raycast"
-cask "red-canary-mac-monitor"
 cask "signal"
 cask "soulver"
 cask "spotify"
 cask "superhuman"
 cask "swish"
 cask "synologyassistant"
-cask "tabby"
 cask "tailscale"
 cask "termius"
 cask "todoist"
 cask "visual-studio-code"
+cask "vivaldi"
 cask "warp"
 cask "wireshark"
+cask "xcodes"
 cask "yubico-yubikey-manager"
 cask "zen-browser"
 cask "zoom"
-mas "Anybox", id: 1593408455
-mas "Apple Configurator", id: 1037126344
+mas "Alpenglow", id: 978589174
 mas "Bear", id: 1091189122
 mas "Bitwarden", id: 1352778147
-mas "Data Jar", id: 1453273600
+mas "Cardhop", id: 1290358394
+mas "Controller", id: 1198176727
 mas "Developer", id: 640199958
 mas "Drafts", id: 1435957248
 mas "Fantastical", id: 975937182
 mas "Flow", id: 1423210932
-mas "Ice Cubes", id: 6444915884
 mas "KakaoTalk", id: 869223134
 mas "Keynote", id: 409183694
 mas "LanScan", id: 472226235
-mas "Logger", id: 1611554653
-mas "Maccy", id: 1527619437
-mas "Mela", id: 1568924476
 mas "Menu Box", id: 6463440793
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixea", id: 1507782672
+mas "Tripsy", id: 1429967544
+mas "Xcode", id: 497799835
 whalebrew "directory"
 vscode "42crunch.vscode-openapi"
 vscode "4ops.terraform"
@@ -278,7 +279,6 @@ vscode "ibm.output-colorizer"
 vscode "idered.npm"
 vscode "infeng.vscode-react-typescript"
 vscode "inferrinizzard.prettier-sql-vscode"
-vscode "infracost.infracost"
 vscode "jacano.vscode-pnpm"
 vscode "jasonnutter.search-node-modules"
 vscode "jawandarajbir.react-vscode-extension-pack"
@@ -334,8 +334,6 @@ vscode "ms-vscode.remote-repositories"
 vscode "ms-vscode.vscode-speech"
 vscode "ms-vscode.vscode-typescript-next"
 vscode "msjsdiag.vscode-react-native"
-vscode "mtxr.sqltools"
-vscode "mtxr.sqltools-driver-pg"
 vscode "naumovs.color-highlight"
 vscode "njpwerner.autodocstring"
 vscode "nrwl.angular-console"
