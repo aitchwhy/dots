@@ -15,6 +15,7 @@ brew "atuin"
 brew "localstack"
 brew "awscli-local"
 brew "bat"
+brew "bear"
 brew "biome"
 brew "bitwarden-cli"
 brew "broot"
@@ -142,7 +143,6 @@ cask "karabiner-elements"
 cask "keymapp"
 cask "little-snitch"
 cask "lm-studio"
-cask "lyn"
 cask "maccy"
 cask "mist"
 cask "motrix"
@@ -153,8 +153,8 @@ cask "osquery"
 cask "pdf-expert"
 cask "proton-drive"
 cask "proton-mail"
+cask "proton-mail-bridge"
 cask "proton-pass"
-cask "protonmail-bridge"
 cask "protonvpn"
 cask "proxyman"
 cask "qlmarkdown"
@@ -176,19 +176,15 @@ cask "xcodes"
 cask "yubico-yubikey-manager"
 cask "zen-browser"
 cask "zoom"
-mas "Alpenglow", id: 978589174
 mas "Bear", id: 1091189122
 mas "Bitwarden", id: 1352778147
 mas "Cardhop", id: 1290358394
-mas "Controller", id: 1198176727
-mas "Developer", id: 640199958
 mas "Drafts", id: 1435957248
 mas "Fantastical", id: 975937182
 mas "Flow", id: 1423210932
 mas "KakaoTalk", id: 869223134
 mas "Keynote", id: 409183694
 mas "LanScan", id: 472226235
-mas "Menu Box", id: 6463440793
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixea", id: 1507782672
