@@ -3,6 +3,7 @@ tap "homebrew/bundle"
 tap "homebrew/services"
 tap "koekeishiya/formulae"
 tap "olets/tap"
+tap "rfidresearchgroup/proxmark3"
 tap "temporalio/brew"
 tap "typesense/tap"
 tap "xo/xo"
@@ -106,6 +107,7 @@ brew "coder/coder/coder"
 brew "koekeishiya/formulae/skhd"
 brew "olets/tap/zsh-abbr"
 brew "olets/tap/zsh-autosuggestions-abbreviations-strategy"
+brew "rfidresearchgroup/proxmark3/proxmark3", args: ["with-generic"]
 brew "temporalio/brew/tcld"
 cask "aide-app"
 cask "anki"
@@ -124,6 +126,7 @@ cask "copilot"
 cask "dash"
 cask "devtoys"
 cask "devutils"
+cask "excalidrawz"
 cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-mononoki-nerd-font"
@@ -181,10 +184,8 @@ cask "zen-browser"
 cask "zoom"
 mas "Bear", id: 1091189122
 mas "Bitwarden", id: 1352778147
-mas "Cardhop", id: 1290358394
 mas "Drafts", id: 1435957248
 mas "Fantastical", id: 975937182
-mas "Flow", id: 1423210932
 mas "KakaoTalk", id: 869223134
 mas "Keynote", id: 409183694
 mas "LanScan", id: 472226235
@@ -192,7 +193,6 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Pixea", id: 1507782672
 mas "Tripsy", id: 1429967544
-mas "Xcode", id: 497799835
 whalebrew "directory"
 vscode "42crunch.vscode-openapi"
 vscode "4ops.terraform"
