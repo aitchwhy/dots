@@ -1,6 +1,8 @@
 # This is Git's per-user configuration file.
+
 [user]
-	name = hank
+	email = {{ .name | quote }}
+	email = {{ .email | quote }}
 	email = hank.lee.qed@gmail.com
 
 [init]
