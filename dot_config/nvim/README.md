@@ -162,6 +162,33 @@ Formatting configuration:
 
 ## 🚀 Getting Started
 
+### Using chezmoi (Recommended)
+
+This configuration is managed using chezmoi, a dotfile manager that helps you sync your dotfiles across multiple machines.
+
+1. Install chezmoi:
+```bash
+# macOS
+brew install chezmoi
+
+# Linux
+sh -c "$(curl -fsLS get.chezmoi.io)"
+```
+
+2. Initialize chezmoi with this repository:
+```bash
+chezmoi init https://github.com/aitchwhy/dotfiles.git
+```
+
+3. Apply the configuration:
+```bash
+chezmoi apply
+```
+
+This will automatically set up the Neovim configuration in the correct location.
+
+### Manual Installation
+
 1. Ensure you have NVChad installed:
 ```bash
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
@@ -169,12 +196,29 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 2. Clone this configuration into NVChad's custom directory:
 ```bash
-git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim/lua/custom
+git clone https://github.com/aitchwhy/dotfiles.git ~/.config/nvim/lua/custom
 ```
 
 3. Start Neovim:
 ```bash
 nvim
+```
+
+## 🔄 Syncing Updates
+
+### Using chezmoi
+
+1. Pull latest changes:
+```bash
+chezmoi update
+```
+
+2. Apply your local changes:
+```bash
+chezmoi add ~/.config/nvim
+chezmoi git add .
+chezmoi git commit -m "Update Neovim configuration"
+chezmoi git push
 ```
 
 On first launch:
